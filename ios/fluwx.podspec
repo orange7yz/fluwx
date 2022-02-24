@@ -17,7 +17,7 @@ A new Flutter plugin for Wechat SDK.
   s.public_header_files = 'Classes/public/*.h'
   s.static_framework = true
   s.dependency 'Flutter'
-  s.dependency 'WechatOpenSDK-NoPay', '1.9.2-0'
+  s.dependency 'WechatOpenSDK-NoPay', '1.8.0'
  # s.dependency 'WechatOpenSDK_Fuck',  '~> 1.9.2'
 
 # s.dependency 'OpenWeChatSDK','~> 1.8.3+10'
