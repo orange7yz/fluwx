@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart';
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart';
 
 class SignAutoDeductPage extends StatefulWidget {
   @override
@@ -9,14 +9,12 @@ class SignAutoDeductPage extends StatefulWidget {
 
 /// see wechat [document](https://pay.weixin.qq.com/wiki/doc/api/pap.php?chapter=18_5&index=2)
 class _SignAutoDeductPageState extends State<SignAutoDeductPage> {
-  TextEditingController appId =
-      TextEditingController(text: "wx316f9c82e99ac105");
+  TextEditingController appId = TextEditingController(text: "wx316f9c82e99ac105");
   TextEditingController mchId = TextEditingController(text: "");
   TextEditingController planId = TextEditingController(text: "");
   TextEditingController contractCode = TextEditingController(text: "");
   TextEditingController requestSerial = TextEditingController(text: "");
-  TextEditingController contractDisplayAccount =
-      TextEditingController(text: "");
+  TextEditingController contractDisplayAccount = TextEditingController(text: "");
   TextEditingController notifyUrl = TextEditingController(text: "");
   TextEditingController version = TextEditingController(text: "1.0");
   TextEditingController sign = TextEditingController(text: "");
@@ -60,13 +58,9 @@ class _SignAutoDeductPageState extends State<SignAutoDeductPage> {
             _buildTextField(title: "appId", textEditController: appId),
             _buildTextField(title: "mchId", textEditController: mchId),
             _buildTextField(title: "planId", textEditController: planId),
-            _buildTextField(
-                title: "contractCode", textEditController: contractCode),
-            _buildTextField(
-                title: "requestSerial", textEditController: requestSerial),
-            _buildTextField(
-                title: "contractDisplayAccount",
-                textEditController: contractDisplayAccount),
+            _buildTextField(title: "contractCode", textEditController: contractCode),
+            _buildTextField(title: "requestSerial", textEditController: requestSerial),
+            _buildTextField(title: "contractDisplayAccount", textEditController: contractDisplayAccount),
             _buildTextField(title: "notifyUrl", textEditController: notifyUrl),
             _buildTextField(title: "version", textEditController: version),
             _buildTextField(title: "sign", textEditController: sign),
@@ -104,7 +98,7 @@ class _SignAutoDeductPageState extends State<SignAutoDeductPage> {
         contractDisplayAccount: contractDisplayAccount.text,
         notifyUrl: notifyUrl.text,
         version: version.text,
-        sign: sign.text ,
+        sign: sign.text,
         timestamp: timestamp.text,
         returnApp: '3');
   }

@@ -17,16 +17,15 @@
  * the License.
  */
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart';
-import 'package:fluwx_no_pay/src/share/share_models.dart';
-import 'package:fluwx_no_pay/src/wechat_enums.dart';
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart';
+import 'package:fluwx_no_pay_ww/src/share/share_models.dart';
+import 'package:fluwx_no_pay_ww/src/wechat_enums.dart';
 
 void main() {
   test("test create WeChatShareImageModel with thumbnail", () {
     var image = WeChatImage.network("http://openflutter.dev/fluwx.png");
     var thumbnail = WeChatImage.network("http://openflutter.dev/fluwx.png");
-    var model = WeChatShareImageModel(image,
-        scene: WeChatScene.FAVORITE, thumbnail: thumbnail);
+    var model = WeChatShareImageModel(image, scene: WeChatScene.FAVORITE, thumbnail: thumbnail);
     expect(model.source, image);
     expect(model.scene, WeChatScene.FAVORITE);
     expect(model.thumbnail, thumbnail);
@@ -43,9 +42,7 @@ void main() {
   test("test WeChatShareImageModel toMap", () {
     var image = WeChatImage.network("http://openflutter.dev/fluwx.png");
     var thumbnail = WeChatImage.network("http://openflutter.dev/fluwx.png");
-    var map = WeChatShareImageModel(image,
-            scene: WeChatScene.FAVORITE, thumbnail: thumbnail)
-        .toMap();
+    var map = WeChatShareImageModel(image, scene: WeChatScene.FAVORITE, thumbnail: thumbnail).toMap();
     assert(map["thumbnail"] != null);
     expect(map["thumbnail"]["source"], "http://openflutter.dev/fluwx.png");
   });

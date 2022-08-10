@@ -17,15 +17,14 @@
  * the License.
  */
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluwx_no_pay/src/share/share_models.dart';
-import 'package:fluwx_no_pay/src/wechat_enums.dart';
-import 'package:fluwx_no_pay/src/wechat_file.dart';
+import 'package:fluwx_no_pay_ww/src/share/share_models.dart';
+import 'package:fluwx_no_pay_ww/src/wechat_enums.dart';
+import 'package:fluwx_no_pay_ww/src/wechat_file.dart';
 
 void main() {
   group("construct", () {
     test("non default values", () {
-      var thumbnail =
-          WeChatImage.network("http://openflutter.dev/fluwx.png");
+      var thumbnail = WeChatImage.network("http://openflutter.dev/fluwx.png");
       var model = WeChatShareMiniProgramModel(
           webPageUrl: "http://openflutter.dev",
           miniProgramType: WXMiniProgramType.PREVIEW,
@@ -43,8 +42,7 @@ void main() {
     });
 
     test("default values", () {
-      var model = WeChatShareMiniProgramModel(
-          webPageUrl: "http://openflutter.dev", userName: "userName");
+      var model = WeChatShareMiniProgramModel(webPageUrl: "http://openflutter.dev", userName: "userName");
       expect(model.webPageUrl, "http://openflutter.dev");
       expect(model.miniProgramType, WXMiniProgramType.RELEASE);
       expect(model.thumbnail, null);
@@ -55,8 +53,7 @@ void main() {
 
   group("toMap", () {
     test("with thumbnail", () {
-      var thumbnail =
-          WeChatImage.network("http://openflutter.dev/fluwx.png");
+      var thumbnail = WeChatImage.network("http://openflutter.dev/fluwx.png");
       var map = WeChatShareMiniProgramModel(
               webPageUrl: "http://openflutter.dev",
               miniProgramType: WXMiniProgramType.PREVIEW,

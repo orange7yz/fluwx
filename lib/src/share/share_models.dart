@@ -17,7 +17,7 @@
  * the License.
  */
 import 'package:flutter/foundation.dart';
-import 'package:fluwx_no_pay/src/wechat_enums.dart';
+import 'package:fluwx_no_pay_ww/src/wechat_enums.dart';
 
 import '../wechat_file.dart';
 

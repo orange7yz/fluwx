@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart';
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart';
 
 class ShareVideoPage extends StatefulWidget {
   @override
@@ -38,9 +38,8 @@ class _ShareMusicPageState extends State<ShareVideoPage> {
         child: new Column(
           children: <Widget>[
             new TextField(
-              controller: TextEditingController(
-                  text:
-                      "http://staff2.ustc.edu.cn/~wdw/softdown/index.asp/0042515_05.ANDY.mp3"),
+              controller:
+                  TextEditingController(text: "http://staff2.ustc.edu.cn/~wdw/softdown/index.asp/0042515_05.ANDY.mp3"),
               onChanged: (str) {
                 _videoUrl = str;
               },
@@ -61,8 +60,7 @@ class _ShareMusicPageState extends State<ShareVideoPage> {
               decoration: InputDecoration(labelText: "title"),
             ),
             new TextField(
-              controller:
-                  TextEditingController(text: "A Popular Rock Band From China"),
+              controller: TextEditingController(text: "A Popular Rock Band From China"),
               onChanged: (str) {
                 _description = str;
               },

@@ -3,7 +3,7 @@
 # Run `pod lib lint fluwx.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'fluwx_no_pay'
+  s.name             = 'fluwx_no_pay-ww'
   s.version          = '0.0.1'
   s.summary          = 'A new Flutter plugin for Wechat SDK.'
   s.description      = <<-DESC

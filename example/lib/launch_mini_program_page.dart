@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart';
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart';
 
 class LaunchMiniProgramPage extends StatefulWidget {
   @override

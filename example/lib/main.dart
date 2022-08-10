@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart';
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart';
 
 import 'pages/auth_by_qr_code_page.dart';
 import 'pages/launch_mini_program_page.dart';

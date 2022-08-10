@@ -17,28 +17,22 @@
  * the License.
  */
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart';
-import 'package:fluwx_no_pay/src/wechat_file.dart';
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart';
+import 'package:fluwx_no_pay_ww/src/wechat_file.dart';
 
 void main() {
-
   test("test  WeChatImage.fromNetwork", () {
-    var withSuffixImage =
-        WeChatImage.network("http://image.openflutter.dev/fluwx.png");
+    var withSuffixImage = WeChatImage.network("http://image.openflutter.dev/fluwx.png");
     expect(withSuffixImage.source, "http://image.openflutter.dev/fluwx.png");
     expect(withSuffixImage.suffix, ".png");
     expect(FileSchema.NETWORK, withSuffixImage.schema);
 
-    var withNoSuffixNoUrlSuffixImage =
-        WeChatImage.network("http://image.openflutter.dev/fluwx");
-    expect("http://image.openflutter.dev/fluwx",
-        withNoSuffixNoUrlSuffixImage.source);
+    var withNoSuffixNoUrlSuffixImage = WeChatImage.network("http://image.openflutter.dev/fluwx");
+    expect("http://image.openflutter.dev/fluwx", withNoSuffixNoUrlSuffixImage.source);
     expect(withNoSuffixNoUrlSuffixImage.suffix, ".jpeg");
     expect(FileSchema.NETWORK, withSuffixImage.schema);
 
-    var withSpecifiedSuffixImage = WeChatImage.network(
-        "http://image.openflutter.dev/fluwx.jpeg",
-        suffix: ".png");
+    var withSpecifiedSuffixImage = WeChatImage.network("http://image.openflutter.dev/fluwx.jpeg", suffix: ".png");
     expect(withSpecifiedSuffixImage.source, "http://image.openflutter.dev/fluwx.jpeg");
     expect(withSpecifiedSuffixImage.suffix, ".png");
     expect(withSpecifiedSuffixImage.schema, FileSchema.NETWORK);

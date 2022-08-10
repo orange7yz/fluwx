@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart';
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart';
 
 class ShareWebPagePage extends StatefulWidget {
   @override
@@ -38,8 +38,7 @@ class ShareWebPagePageState extends State<ShareWebPagePage> {
         child: new Column(
           children: <Widget>[
             new TextField(
-              controller: TextEditingController(
-                  text: "https://github.com/JarvanMo/fluwx"),
+              controller: TextEditingController(text: "https://github.com/JarvanMo/fluwx"),
               onChanged: (str) {
                 _url = str;
               },

@@ -22,7 +22,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:fluwx_no_pay/src/wechat_enums.dart';
+import 'package:fluwx_no_pay_ww/src/wechat_enums.dart';
 
 import 'response/wechat_response.dart';
 import 'share/share_models.dart';
@@ -37,15 +37,12 @@ const Map<Type, String> _shareModelMethodMapper = {
   WeChatShareFileModel: 'shareFile',
 };
 
-MethodChannel _channel = MethodChannel('com.jarvanmo/fluwx')
-  ..setMethodCallHandler(_methodHandler);
+MethodChannel _channel = MethodChannel('com.jarvanmo/fluwx')..setMethodCallHandler(_methodHandler);
 
-StreamController<BaseWeChatResponse> _weChatResponseEventHandlerController =
-    StreamController.broadcast();
+StreamController<BaseWeChatResponse> _weChatResponseEventHandlerController = StreamController.broadcast();
 
 /// Response answers from WeChat after sharing, payment etc.
-Stream<BaseWeChatResponse> get weChatResponseEventHandler =>
-    _weChatResponseEventHandlerController.stream;
+Stream<BaseWeChatResponse> get weChatResponseEventHandler => _weChatResponseEventHandlerController.stream;
 
 /// [true] if WeChat installed, otherwise [false].
 /// Please add WeChat to the white list in order use this method on IOS.
@@ -70,9 +67,7 @@ Future<bool> registerWxApi({
   String? universalLink,
 }) async {
   if (doOnIOS && Platform.isIOS) {
-    if (universalLink == null ||
-        universalLink.trim().isEmpty ||
-        !universalLink.startsWith('https')) {
+    if (universalLink == null || universalLink.trim().isEmpty || !universalLink.startsWith('https')) {
       throw ArgumentError.value(
         universalLink,
         "You're trying to use illegal universal link, see "
@@ -81,12 +76,8 @@ Future<bool> registerWxApi({
       );
     }
   }
-  return await _channel.invokeMethod('registerApp', {
-    'appId': appId,
-    'iOS': doOnIOS,
-    'android': doOnAndroid,
-    'universalLink': universalLink
-  });
+  return await _channel.invokeMethod(
+      'registerApp', {'appId': appId, 'iOS': doOnIOS, 'android': doOnAndroid, 'universalLink': universalLink});
 }
 
 // Get ext Message
@@ -147,11 +138,8 @@ Future<bool> launchWeChatMiniProgram({
   WXMiniProgramType miniProgramType = WXMiniProgramType.RELEASE,
 }) async {
   assert(username.trim().isNotEmpty);
-  return await _channel.invokeMethod('launchMiniProgram', {
-    'userName': username,
-    'path': path,
-    'miniProgramType': miniProgramType.toNativeInt()
-  });
+  return await _channel.invokeMethod(
+      'launchMiniProgram', {'userName': username, 'path': path, 'miniProgramType': miniProgramType.toNativeInt()});
 }
 
 /// request payment with WeChat.
@@ -243,8 +231,7 @@ Future<bool> autoDeductWeChatV2(
   Map<String, String> queryInfo, {
   int businessType = 12,
 }) async {
-  return await _channel.invokeMethod(
-      'autoDeductV2', {'queryInfo': queryInfo, 'businessType': businessType});
+  return await _channel.invokeMethod('autoDeductV2', {'queryInfo': queryInfo, 'businessType': businessType});
 }
 
 /// Sometimes WeChat  is not installed on users's devices.However we can
@@ -301,35 +288,29 @@ Future<bool> authWeChatByPhoneLogin({
   );
 }
 
-Future<bool> openWeChatCustomerServiceChat(
-    {required String url, required String corpId}) async {
-  return await _channel.invokeMethod(
-      "openWeChatCustomerServiceChat", {"corpId": corpId, "url": url});
+Future<bool> openWeChatCustomerServiceChat({required String url, required String corpId}) async {
+  return await _channel.invokeMethod("openWeChatCustomerServiceChat", {"corpId": corpId, "url": url});
 }
 
 /// see * https://pay.weixin.qq.com/wiki/doc/apiv3_partner/Offline/apis/chapter6_2_1.shtml
-Future<bool> openWeChatBusinessView(
-    {required String businessType, required String query}) async {
-  return await _channel.invokeMethod(
-      "openBusinessView", {"businessType": businessType, "query": query});
+Future<bool> openWeChatBusinessView({required String businessType, required String query}) async {
+  return await _channel.invokeMethod("openBusinessView", {"businessType": businessType, "query": query});
 }
 
 Future<bool> checkSupportOpenBusinessView() async {
   return await _channel.invokeMethod("checkSupportOpenBusinessView");
 }
 
-
-Future<bool> openWeChatInvoice({
-  required String appId,
-  required String cardType,
-  String locationId = "",
-  String cardId = "",
-  String canMultiSelect = "1"
-}) async {
+Future<bool> openWeChatInvoice(
+    {required String appId,
+    required String cardType,
+    String locationId = "",
+    String cardId = "",
+    String canMultiSelect = "1"}) async {
   return await _channel.invokeMethod("openWeChatInvoice", {
-    "appId":appId,
-    "cardType":cardType,
-    "locationId":locationId,
+    "appId": appId,
+    "cardType": cardType,
+    "locationId": locationId,
     "cardId": cardId,
     "canMultiSelect": canMultiSelect
   });

@@ -18,13 +18,12 @@
  */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart';
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart';
 
 void main() {
   group("create response", () {
     test("WeChatShareResponse", () {
-      var response = BaseWeChatResponse.create(
-          "onShareResponse", {"type": 1, "errCode": 1, "errStr": "hehe"});
+      var response = BaseWeChatResponse.create("onShareResponse", {"type": 1, "errCode": 1, "errStr": "hehe"});
       expect(response is WeChatShareResponse, true);
       var casted = response as WeChatShareResponse;
       expect(casted.type, 1);
@@ -33,15 +32,8 @@ void main() {
     });
 
     test("WeChatAuthResponse", () {
-      var response = BaseWeChatResponse.create("onAuthResponse", {
-        "type": 1,
-        "errCode": 1,
-        "errStr": "hehe",
-        "country": "cn",
-        "lang": "lang",
-        "code": "code",
-        "state": "ok"
-      });
+      var response = BaseWeChatResponse.create("onAuthResponse",
+          {"type": 1, "errCode": 1, "errStr": "hehe", "country": "cn", "lang": "lang", "code": "code", "state": "ok"});
       expect(response is WeChatAuthResponse, true);
       var casted = response as WeChatAuthResponse;
       expect(casted.type, 1);
@@ -54,8 +46,8 @@ void main() {
     });
 
     test("onLaunchMiniProgramResponse", () {
-      var response = BaseWeChatResponse.create("onLaunchMiniProgramResponse",
-          {"type": 1, "errCode": 1, "errStr": "hehe", "extMsg": "extMsg"});
+      var response = BaseWeChatResponse.create(
+          "onLaunchMiniProgramResponse", {"type": 1, "errCode": 1, "errStr": "hehe", "extMsg": "extMsg"});
       expect(response is WeChatLaunchMiniProgramResponse, true);
       var casted = response as WeChatLaunchMiniProgramResponse;
       expect(casted.type, 1);
@@ -65,8 +57,8 @@ void main() {
     });
 
     test("WeChatPaymentResponse", () {
-      var response = BaseWeChatResponse.create("onPayResponse",
-          {"type": 1, "errCode": 1, "errStr": "hehe", "extData": "extData"});
+      var response =
+          BaseWeChatResponse.create("onPayResponse", {"type": 1, "errCode": 1, "errStr": "hehe", "extData": "extData"});
       expect(response is WeChatPaymentResponse, true);
       var casted = response as WeChatPaymentResponse;
       expect(casted.type, 1);
@@ -98,13 +90,8 @@ void main() {
     });
 
     test("WeChatAutoDeductResponse", () {
-      var response = BaseWeChatResponse.create("onAutoDeductResponse", {
-        "type": 1,
-        "errCode": 0,
-        "errStr": "hehe",
-        "businessType": 2,
-        "resultInfo": "resultInfo"
-      });
+      var response = BaseWeChatResponse.create("onAutoDeductResponse",
+          {"type": 1, "errCode": 0, "errStr": "hehe", "businessType": 2, "resultInfo": "resultInfo"});
       expect(response is WeChatOpenBusinessWebviewResponse, true);
       var casted = response as WeChatOpenBusinessWebviewResponse;
       assert(casted.isSuccessful);

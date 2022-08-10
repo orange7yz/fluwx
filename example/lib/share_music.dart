@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart';
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart';
 
 class ShareMusicPage extends StatefulWidget {
   @override
@@ -7,8 +7,7 @@ class ShareMusicPage extends StatefulWidget {
 }
 
 class _ShareMusicPageState extends State<ShareMusicPage> {
-  String _musicUrl =
-      "http://staff2.ustc.edu.cn/~wdw/softdown/index.asp/0042515_05.ANDY.mp3";
+  String _musicUrl = "http://staff2.ustc.edu.cn/~wdw/softdown/index.asp/0042515_05.ANDY.mp3";
   String _musicLowBandUrl = "http://www.qq.com";
   String _title = "Beyond";
   String _description = "A Popular Rock Band From China";
@@ -39,9 +38,8 @@ class _ShareMusicPageState extends State<ShareMusicPage> {
         child: new Column(
           children: <Widget>[
             new TextField(
-              controller: TextEditingController(
-                  text:
-                      "http://staff2.ustc.edu.cn/~wdw/softdown/index.asp/0042515_05.ANDY.mp3"),
+              controller:
+                  TextEditingController(text: "http://staff2.ustc.edu.cn/~wdw/softdown/index.asp/0042515_05.ANDY.mp3"),
               onChanged: (str) {
                 _musicUrl = str;
               },
@@ -62,8 +60,7 @@ class _ShareMusicPageState extends State<ShareMusicPage> {
               decoration: InputDecoration(labelText: "title"),
             ),
             new TextField(
-              controller:
-                  TextEditingController(text: "A Popular Rock Band From China"),
+              controller: TextEditingController(text: "A Popular Rock Band From China"),
               onChanged: (str) {
                 _description = str;
               },

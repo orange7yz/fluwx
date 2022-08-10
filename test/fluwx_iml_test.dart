@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart' as fluwx;
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart' as fluwx;
 
 void main() {
   const MethodChannel channel = MethodChannel('com.jarvanmo/fluwx');
@@ -16,12 +16,10 @@ void main() {
           return Future.value(false);
         }
       } else if (methodCall.method == "shareText") {
-        channel.invokeMethod(
-            "onShareResponse", {"type": 1, "errCode": 1, "errStr": "hehe"});
+        channel.invokeMethod("onShareResponse", {"type": 1, "errCode": 1, "errStr": "hehe"});
         return Future.value(true);
       } else if (methodCall.method == "shareImage") {
-        channel.invokeMethod(
-            "onShareResponse", {"type": 1, "errCode": 0, "errStr": ""});
+        channel.invokeMethod("onShareResponse", {"type": 1, "errCode": 0, "errStr": ""});
         return Future.value(true);
       }
       return '42';
@@ -43,14 +41,11 @@ void main() {
 
   group("share", () {
     test("text", () async {
-      expect(
-          await fluwx.shareToWeChat(fluwx.WeChatShareTextModel("text")), true);
+      expect(await fluwx.shareToWeChat(fluwx.WeChatShareTextModel("text")), true);
     });
 
     test("shareImage", () async {
-      expect(
-          await fluwx.shareToWeChat(fluwx.WeChatShareImageModel(
-              fluwx.WeChatImage.network("http://flutter.dev"))),
+      expect(await fluwx.shareToWeChat(fluwx.WeChatShareImageModel(fluwx.WeChatImage.network("http://flutter.dev"))),
           true);
     });
   });
@@ -58,8 +53,6 @@ void main() {
   group("learn", () {
     test("description", () async {
       print("argumentsss");
-
-
     });
   });
 }

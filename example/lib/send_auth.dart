@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluwx_no_pay/fluwx_no_pay.dart' as fluwx;
+import 'package:fluwx_no_pay_ww/fluwx_no_pay_ww.dart' as fluwx;
 
 class SendAuthPage extends StatefulWidget {
   @override
@@ -37,10 +37,7 @@ class _SendAuthPageState extends State<SendAuthPage> {
         children: <Widget>[
           OutlineButton(
             onPressed: () {
-              fluwx
-                  .sendWeChatAuth(
-                      scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
-                  .then((data) {});
+              fluwx.sendWeChatAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test").then((data) {});
             },
             child: const Text("send auth"),
           ),
