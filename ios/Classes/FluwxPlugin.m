@@ -188,40 +188,6 @@ FlutterMethodChannel *channel = nil;
     }
 }
 
-- (void)handlePayment:(FlutterMethodCall *)call result:(FlutterResult)result {
-
-
-    NSNumber *timestamp = call.arguments[@"timeStamp"];
-
-    NSString *partnerId = call.arguments[@"partnerId"];
-    NSString *prepayId = call.arguments[@"prepayId"];
-    NSString *packageValue = call.arguments[@"packageValue"];
-    NSString *nonceStr = call.arguments[@"nonceStr"];
-    UInt32 timeStamp = [timestamp unsignedIntValue];
-    NSString *sign = call.arguments[@"sign"];
-    [WXApiRequestHandler sendPayment:call.arguments[@"appId"]
-                           PartnerId:partnerId
-                            PrepayId:prepayId
-                            NonceStr:nonceStr
-                           Timestamp:timeStamp
-                             Package:packageValue
-                                Sign:sign completion:^(BOOL done) {
-                result(@(done));
-            }];
-}
-
-- (void)handleHongKongWalletPayment:(FlutterMethodCall *)call result:(FlutterResult)result {
-    NSString *partnerId = call.arguments[@"prepayId"];
-
-    WXOpenBusinessWebViewReq *req = [[WXOpenBusinessWebViewReq alloc] init];
-    req.businessType = 1;
-    NSMutableDictionary *queryInfoDic = [NSMutableDictionary dictionary];
-    [queryInfoDic setObject:partnerId forKey:@"token"];
-    req.queryInfoDic = queryInfoDic;
-    [WXApi sendReq:req completion:^(BOOL done) {
-        result(@(done));
-    }];
-}
 
 - (void)handleLaunchMiniProgram:(FlutterMethodCall *)call result:(FlutterResult)result {
     NSString *userName = call.arguments[@"userName"];
