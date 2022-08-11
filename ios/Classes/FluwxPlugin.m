@@ -75,12 +75,6 @@ FlutterMethodChannel *channel = nil;
         result(@([WXApi openWXApp]));
     } else if ([@"launchMiniProgram" isEqualToString:call.method]) {
         [self handleLaunchMiniProgram:call result:result];
-    } else if ([@"subscribeMsg" isEqualToString:call.method]) {
-        [self handleSubscribeWithCall:call result:result];
-    } else if ([@"autoDeduct" isEqualToString:call.method]) {
-        [self handleAutoDeductWithCall:call result:result];
-    } else if ([@"autoDeductV2" isEqualToString:call.method]) {
-        [self handleautoDeductV2:call result:result];
     } else if ([@"openBusinessView" isEqualToString:call.method]) {
         [self handleOpenBusinessView:call result:result];
     }else if([@"authByPhoneLogin" isEqualToString:call.method]){
@@ -188,41 +182,6 @@ FlutterMethodChannel *channel = nil;
     }
 }
 
-- (void)handlePayment:(FlutterMethodCall *)call result:(FlutterResult)result {
-
-
-    NSNumber *timestamp = call.arguments[@"timeStamp"];
-
-    NSString *partnerId = call.arguments[@"partnerId"];
-    NSString *prepayId = call.arguments[@"prepayId"];
-    NSString *packageValue = call.arguments[@"packageValue"];
-    NSString *nonceStr = call.arguments[@"nonceStr"];
-    UInt32 timeStamp = [timestamp unsignedIntValue];
-    NSString *sign = call.arguments[@"sign"];
-    [WXApiRequestHandler sendPayment:call.arguments[@"appId"]
-                           PartnerId:partnerId
-                            PrepayId:prepayId
-                            NonceStr:nonceStr
-                           Timestamp:timeStamp
-                             Package:packageValue
-                                Sign:sign completion:^(BOOL done) {
-                result(@(done));
-            }];
-}
-
-- (void)handleHongKongWalletPayment:(FlutterMethodCall *)call result:(FlutterResult)result {
-    NSString *partnerId = call.arguments[@"prepayId"];
-
-    WXOpenBusinessWebViewReq *req = [[WXOpenBusinessWebViewReq alloc] init];
-    req.businessType = 1;
-    NSMutableDictionary *queryInfoDic = [NSMutableDictionary dictionary];
-    [queryInfoDic setObject:partnerId forKey:@"token"];
-    req.queryInfoDic = queryInfoDic;
-    [WXApi sendReq:req completion:^(BOOL done) {
-        result(@(done));
-    }];
-}
-
 - (void)handleLaunchMiniProgram:(FlutterMethodCall *)call result:(FlutterResult)result {
     NSString *userName = call.arguments[@"userName"];
     NSString *path = call.arguments[@"path"];
@@ -244,47 +203,8 @@ FlutterMethodChannel *channel = nil;
 }
 
 
-- (void)handleSubscribeWithCall:(FlutterMethodCall *)call result:(FlutterResult)result {
-    NSDictionary *params = call.arguments;
-    NSString *appId = [params valueForKey:@"appId"];
-    int scene = [[params valueForKey:@"scene"] intValue];
-    NSString *templateId = [params valueForKey:@"templateId"];
-    NSString *reserved = [params valueForKey:@"reserved"];
 
-    WXSubscribeMsgReq *req = [WXSubscribeMsgReq new];
-    req.scene = (UInt32) scene;
-    req.templateId = templateId;
-    req.reserved = reserved;
-    req.openID = appId;
 
-    [WXApi sendReq:req completion:^(BOOL done) {
-        result(@(done));
-    }];
-}
-
-- (void)handleAutoDeductWithCall:(FlutterMethodCall *)call result:(FlutterResult)result {
-    NSMutableDictionary *paramsFromDart = [NSMutableDictionary dictionaryWithDictionary:call.arguments];
-    [paramsFromDart removeObjectForKey:@"businessType"];
-    WXOpenBusinessWebViewReq *req = [[WXOpenBusinessWebViewReq alloc] init];
-    NSNumber *businessType = call.arguments[@"businessType"];
-    req.businessType = [businessType unsignedIntValue];
-    req.queryInfoDic = paramsFromDart;
-    [WXApi sendReq:req completion:^(BOOL done) {
-        result(@(done));
-    }];
-}
-
-- (void)handleautoDeductV2:(FlutterMethodCall *)call result:(FlutterResult)result {
-    NSMutableDictionary *paramsFromDart = call.arguments[@"queryInfo"];
-//    [paramsFromDart removeObjectForKey:@"businessType"];
-    WXOpenBusinessWebViewReq *req = [[WXOpenBusinessWebViewReq alloc] init];
-    NSNumber *businessType = call.arguments[@"businessType"];
-    req.businessType = [businessType unsignedIntValue];
-    req.queryInfoDic = paramsFromDart;
-    [WXApi sendReq:req completion:^(BOOL done) {
-        result(@(done));
-    }];
-}
 
 - (void)handleOpenBusinessView:(FlutterMethodCall *)call result:(FlutterResult)result {
     NSDictionary *params = call.arguments;
