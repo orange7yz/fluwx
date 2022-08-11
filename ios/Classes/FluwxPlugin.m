@@ -75,12 +75,6 @@ FlutterMethodChannel *channel = nil;
         result(@([WXApi openWXApp]));
     } else if ([@"launchMiniProgram" isEqualToString:call.method]) {
         [self handleLaunchMiniProgram:call result:result];
-    } else if ([@"subscribeMsg" isEqualToString:call.method]) {
-        [self handleSubscribeWithCall:call result:result];
-    } else if ([@"autoDeduct" isEqualToString:call.method]) {
-        [self handleAutoDeductWithCall:call result:result];
-    } else if ([@"autoDeductV2" isEqualToString:call.method]) {
-        [self handleautoDeductV2:call result:result];
     } else if ([@"openBusinessView" isEqualToString:call.method]) {
         [self handleOpenBusinessView:call result:result];
     }else if([@"authByPhoneLogin" isEqualToString:call.method]){
@@ -103,12 +97,12 @@ FlutterMethodChannel *channel = nil;
 - (void)openWeChatInvoice:(FlutterMethodCall *)call result:(FlutterResult)result {
 
     NSString *appId = call.arguments[@"appId"];
-    
+
     if ([FluwxStringUtil isBlank:appId]) {
         result([FlutterError errorWithCode:@"invalid app id" message:@"are you sure your app id is correct ? " details:appId]);
         return;
     }
-    
+
     [WXApiRequestHandler chooseInvoice: appId
                           timestamp:[[NSDate date] timeIntervalSince1970]
                          completion:^(BOOL done) {
@@ -170,8 +164,8 @@ FlutterMethodChannel *channel = nil;
 - (void)openWeChatCustomerServiceChat:(FlutterMethodCall *)call result:(FlutterResult)result {
     NSString *url = call.arguments[@"url"];
     NSString *corpId = call.arguments[@"corpId"];
-    
-    
+
+
     WXOpenCustomerServiceReq *req = [[WXOpenCustomerServiceReq alloc] init];
     req.corpid = corpId;    //企业ID
     req.url = url;         //客服URL
@@ -207,49 +201,6 @@ FlutterMethodChannel *channel = nil;
                                                   type:miniProgramType completion:^(BOOL done) {
                 result(@(done));
             }];
-}
-
-
-- (void)handleSubscribeWithCall:(FlutterMethodCall *)call result:(FlutterResult)result {
-    NSDictionary *params = call.arguments;
-    NSString *appId = [params valueForKey:@"appId"];
-    int scene = [[params valueForKey:@"scene"] intValue];
-    NSString *templateId = [params valueForKey:@"templateId"];
-    NSString *reserved = [params valueForKey:@"reserved"];
-
-    WXSubscribeMsgReq *req = [WXSubscribeMsgReq new];
-    req.scene = (UInt32) scene;
-    req.templateId = templateId;
-    req.reserved = reserved;
-    req.openID = appId;
-
-    [WXApi sendReq:req completion:^(BOOL done) {
-        result(@(done));
-    }];
-}
-
-- (void)handleAutoDeductWithCall:(FlutterMethodCall *)call result:(FlutterResult)result {
-    NSMutableDictionary *paramsFromDart = [NSMutableDictionary dictionaryWithDictionary:call.arguments];
-    [paramsFromDart removeObjectForKey:@"businessType"];
-    WXOpenBusinessWebViewReq *req = [[WXOpenBusinessWebViewReq alloc] init];
-    NSNumber *businessType = call.arguments[@"businessType"];
-    req.businessType = [businessType unsignedIntValue];
-    req.queryInfoDic = paramsFromDart;
-    [WXApi sendReq:req completion:^(BOOL done) {
-        result(@(done));
-    }];
-}
-
-- (void)handleautoDeductV2:(FlutterMethodCall *)call result:(FlutterResult)result {
-    NSMutableDictionary *paramsFromDart = call.arguments[@"queryInfo"];
-//    [paramsFromDart removeObjectForKey:@"businessType"];
-    WXOpenBusinessWebViewReq *req = [[WXOpenBusinessWebViewReq alloc] init];
-    NSNumber *businessType = call.arguments[@"businessType"];
-    req.businessType = [businessType unsignedIntValue];
-    req.queryInfoDic = paramsFromDart;
-    [WXApi sendReq:req completion:^(BOOL done) {
-        result(@(done));
-    }];
 }
 
 - (void)handleOpenBusinessView:(FlutterMethodCall *)call result:(FlutterResult)result {
